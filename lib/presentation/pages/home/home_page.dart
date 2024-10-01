@@ -1,5 +1,9 @@
+import 'package:newton_tech_app/presentation/pages/home/home_notifier.dart';
+import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../di_providers/di_provider.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({
@@ -18,6 +22,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    HomeNotifier notifier = ref.read(homeStateNotifierProvider);
+
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(title: const Text('Newton Tech App')),
@@ -28,7 +34,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               children: [
                 _buildSubPageBtn(
                   page: 'View Launches List',
-                  onPressed: () => null,
+                  onPressed: () => notifier.goToLaunchesListPage(),
                 ),
               ],
             ),
