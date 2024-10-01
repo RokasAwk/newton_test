@@ -5,6 +5,8 @@ import 'package:newton_tech_app/domain/usecases/get_launches_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/apis/global_response_handler.dart';
+import '../../domain/usecases/common/server_error.dart';
 import '../pages/home/home_notifier.dart';
 import '../pages/launches_list/launches_list_notifier.dart';
 import '../pages/launches_list/launches_list_state.dart';
@@ -27,4 +29,8 @@ final launchApiProvider = Provider.autoDispose<LaunchApi>((ref) {
   return LaunchApi(
     Dio(),
   );
+});
+
+final serverErrorFactoryProvider = Provider<ServerErrorFactory>((ref) {
+  return ServerErrorFactoryImpl();
 });
