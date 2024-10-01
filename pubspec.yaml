@@ -47,6 +47,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   fluttertoast: ^8.0.9
   go_router_builder: ^2.7.1
+  mockito: ^5.4.4
 
 dev_dependencies:
   flutter_test:
