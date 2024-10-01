@@ -4,21 +4,21 @@ import 'app_colors.dart';
 
 var appTheme = ThemeData(
   useMaterial3: false,
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: AppColors.primaryColor,
   appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.primaryColor,
     centerTitle: false,
     titleSpacing: 24,
   ),
-  primaryColor: AppColors.primary,
+  primaryColor: AppColors.primaryColor,
   bottomSheetTheme: const BottomSheetThemeData(
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.primaryColor,
   ),
   scrollbarTheme: ScrollbarThemeData(
     radius: const Radius.circular(10),
     thickness: MaterialStateProperty.all(4),
     trackVisibility: MaterialStateProperty.all(false),
     thumbVisibility: MaterialStateProperty.all(true),
-    thumbColor: MaterialStateProperty.all(AppColors.primary),
+    thumbColor: MaterialStateProperty.all(AppColors.primaryColor),
   ),
 );
