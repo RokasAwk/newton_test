@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:newton_tech_app/presentation/pages/home/home_notifier.dart';
 import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_state.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +51,10 @@ Widget _buildSubPageBtn({
 }) {
   return OutlinedButton(
       onPressed: onPressed,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.white,
+        side: const BorderSide(color: Colors.white),
+      ),
       child: Text(
         page,
         style: const TextStyle(fontSize: 16),
