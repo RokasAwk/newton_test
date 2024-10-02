@@ -106,7 +106,7 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
   }
 
   Widget _buildBody({
-    List<LaunchInfo>? launchesList,
+    required List<LaunchInfo> launchesList,
     required LaunchesListState state,
     required LaunchesListNotifier notifier,
   }) {
@@ -119,11 +119,9 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
         ),
         const SizedBox(height: 12),
         Expanded(
-          child: (launchesList == null)
-              ? const Center(child: CircularProgressIndicator())
-              : launchesList.isEmpty
-                  ? _buildEmptyList()
-                  : _buildListView(launchesList),
+          child: launchesList.isEmpty
+              ? _buildEmptyList()
+              : _buildListView(launchesList),
         ),
       ],
     );
