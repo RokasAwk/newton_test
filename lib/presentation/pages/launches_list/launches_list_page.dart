@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
-import 'package:newton_tech_app/domain/entity/rocket_info.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_notifier.dart';
 import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_state.dart';
+import 'package:newton_tech_app/presentation/pages/launches_list/widgets/launches_list_filter_sheet.dart';
+import 'package:newton_tech_app/presentation/pages/widgets/error_state_widget%20.dart';
 import 'package:newton_tech_app/presentation/theme/app_colors.dart';
-import 'package:newton_tech_app/presentation/utils/int_extension.dart';
+import 'package:newton_tech_app/presentation/utils/date_util.dart';
 
 import '../../../domain/entity/launch_info.dart';
 import '../../di_providers/di_provider.dart';
@@ -38,6 +39,8 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
   @override
   Widget build(BuildContext context) {
     LaunchesListState state = ref.watch(launchesListStateNotifierProvider);
+    LaunchesListNotifier notifier =
+        ref.read(launchesListStateNotifierProvider.notifier);
 
     return SafeArea(
       child: Scaffold(
@@ -48,9 +51,34 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
               _buildMenuBtn(),
             ],
           ),
-          body: _buildBody(
-            launchesList: state.launchesList,
-          )),
+          body: state.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (
+                List<LaunchInfo> launchesList,
+                DateTime startTime,
+                DateTime endTime,
+                int? flightNumber,
+                String? missionName,
+              ) {
+                if (launchesList.isEmpty) {
+                  return Column(
+                    children: [
+                      _buildFilterSection(state: state, notifier: notifier),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.25,
+                      ),
+                      const EmptyListWidget()
+                    ],
+                  );
+                }
+
+                return _buildBody(
+                  launchesList: launchesList,
+                  state: state,
+                  notifier: notifier,
+                );
+              },
+              error: () => const ErrorStateWidget())),
     );
   }
 
@@ -59,24 +87,50 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
       onPressed: () => null,
       icon: const Icon(
         Icons.more_vert,
-        color: Colors.white,
+        color: AppColors.white,
+      ),
+    );
+  }
+
+  Widget _buildFilterSection({
+    required LaunchesListState state,
+    required LaunchesListNotifier notifier,
+  }) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: _horizontalPadding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          FilterButton(
+            filterTitle: getFiterTitle(state),
+            onTap: () {
+              _showContributeFilterSheet(
+                state: state,
+                notifier: notifier,
+              );
+            },
+          ),
+          IconButton(
+            onPressed: () => notifier.resetState(),
+            icon: const Icon(Icons.refresh),
+            color: AppColors.filterColor,
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildBody({
     List<LaunchInfo>? launchesList,
+    required LaunchesListState state,
+    required LaunchesListNotifier notifier,
   }) {
     return Column(
       children: [
         const SizedBox(height: 12),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: _horizontalPadding),
-          child: const Row(
-            children: [
-              FilterButton(filterTitle: 'Flight number'),
-            ],
-          ),
+        _buildFilterSection(
+          state: state,
+          notifier: notifier,
         ),
         const SizedBox(height: 12),
         Expanded(
@@ -154,7 +208,67 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
     );
   }
 
+  String getFiterTitle(LaunchesListState state) {
+    state = state as Loaded;
+
+    if (state.flightNumber == null && state.missionName == null) {
+      return 'Filter';
+    }
+
+    if (state.flightNumber != null &&
+        state.missionName != null &&
+        state.missionName!.isNotEmpty) {
+      return 'Flight number: ${state.flightNumber} & Mission name: ${state.missionName}';
+    }
+
+    if (state.flightNumber != null) {
+      return 'Flight number: ${state.flightNumber}';
+    }
+
+    if (state.missionName != null && state.missionName!.isNotEmpty) {
+      return 'Mission name: ${state.missionName}';
+    }
+
+    return 'Filter: ${state.startTime.onlyDate()} ~ ${state.endTime.onlyDate()}';
+  }
+
   String getLaunchTimeFromUnixTime(int launchDateUnix) {
-    return launchDateUnix.timeStringConvertFromUnixTime();
+    return DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000)
+        .toDateTimeString();
+  }
+
+  void _showContributeFilterSheet({
+    required LaunchesListState state,
+    required LaunchesListNotifier notifier,
+  }) {
+    state = state as Loaded;
+
+    DateTimeRange dateTimeRange = DateTimeRange(
+      start: state.startTime,
+      end: state.endTime,
+    );
+
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        isDismissible: false,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+        ),
+        builder: (context) {
+          return LaunchesListFilterSheet(
+              datetimeRange: dateTimeRange,
+              onTapConfirm: (
+                DateTimeRange dateTimeRange,
+                int? flightNumber,
+                String? missionName,
+              ) =>
+                  notifier.updateFilterData(
+                    dateTimeRange: dateTimeRange,
+                    flightNumber: flightNumber,
+                    missionName: missionName,
+                  ));
+        });
   }
 }
