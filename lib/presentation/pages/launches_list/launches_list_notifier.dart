@@ -8,6 +8,7 @@ import '../../../domain/usecases/get_launches_usecase.dart';
 abstract class LaunchesListNotifier extends StateNotifier<LaunchesListState> {
   LaunchesListNotifier(super.state);
 
+  Future<void> onInit();
   Future<void> fetchData();
   void resetState();
   void updateFilterData({
@@ -25,15 +26,29 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
   }) : super(LaunchesListState.loading());
 
   @override
+  Future<void> onInit() async {
+    await fetchData();
+
+    state = (state as Loaded).copyWith(
+      startTime: DateTime.parse('1970-01-01'),
+    );
+  }
+
+  @override
   Future<void> fetchData() async {
     final result = await getLaunchesUseCase.execute(null);
     result.when(success: (data) {
-      state = LaunchesListState.loaded(
+      if (state is Loading) {
+        state = LaunchesListState.loaded(
+          launchesList: data,
+          startTime: DateTime.parse('1970-01-01'),
+          endTime: DateTime.now(),
+          missionName: null,
+          flightNumber: null,
+        );
+      }
+      state = (state as Loaded).copyWith(
         launchesList: data,
-        startTime: DateTime.parse('1970-01-01'),
-        endTime: DateTime.now(),
-        missionName: null,
-        flightNumber: null,
       );
     }, error: (error) {
       state = LaunchesListState.error();
@@ -42,7 +57,6 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
 
   @override
   void resetState() {
-    state = LaunchesListState.loading();
     fetchData();
   }
 
@@ -53,6 +67,13 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
     String? missionName,
   }) {
     List<LaunchInfo> sortedList = [];
+
+    state = (state as Loaded).copyWith(
+      startTime: dateTimeRange.start,
+      endTime: dateTimeRange.end,
+      flightNumber: flightNumber,
+      missionName: missionName,
+    );
 
     // only DateTime changed
     if (flightNumber == null && (missionName == null || missionName.isEmpty)) {
@@ -83,18 +104,14 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
           missionName.isNotEmpty) {
         sortedList = checkFlightNumberAndMissionNameChanged(
           dateTimeRange: dateTimeRange,
-          flightNumber: flightNumber!,
-          missionName: missionName!,
+          flightNumber: flightNumber,
+          missionName: missionName,
         );
       }
     }
 
     state = (state as Loaded).copyWith(
       launchesList: sortedList,
-      startTime: dateTimeRange.start,
-      endTime: dateTimeRange.end,
-      flightNumber: flightNumber,
-      missionName: missionName,
     );
   }
 

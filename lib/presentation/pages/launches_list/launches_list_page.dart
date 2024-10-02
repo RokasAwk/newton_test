@@ -28,7 +28,7 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await ref.read(launchesListStateNotifierProvider.notifier).fetchData();
+      await ref.read(launchesListStateNotifierProvider.notifier).onInit();
     });
 
     super.initState();
