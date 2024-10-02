@@ -5,9 +5,14 @@ part 'launches_list_state.freezed.dart';
 
 @freezed
 class LaunchesListState with _$LaunchesListState {
-  factory LaunchesListState({
+  factory LaunchesListState.loading() = Loading;
+  factory LaunchesListState.loaded({
     required List<LaunchInfo> launchesList,
-  }) = _LaunchesListState;
+    required DateTime startTime,
+    required DateTime endTime,
+    int? flightNumber,
+    String? missionName,
+  }) = Loaded;
 
-  factory LaunchesListState.init() => LaunchesListState(launchesList: []);
+  factory LaunchesListState.error() = Error;
 }

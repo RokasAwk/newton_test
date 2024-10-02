@@ -16,10 +16,55 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LaunchesListState {
-  List<LaunchInfo> get launchesList => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LaunchesListStateCopyWith<LaunchesListState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)
+        loaded,
+    required TResult Function() error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult? Function()? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -28,8 +73,6 @@ abstract class $LaunchesListStateCopyWith<$Res> {
   factory $LaunchesListStateCopyWith(
           LaunchesListState value, $Res Function(LaunchesListState) then) =
       _$LaunchesListStateCopyWithImpl<$Res, LaunchesListState>;
-  @useResult
-  $Res call({List<LaunchInfo> launchesList});
 }
 
 /// @nodoc
@@ -41,58 +84,187 @@ class _$LaunchesListStateCopyWithImpl<$Res, $Val extends LaunchesListState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
 
-  @pragma('vm:prefer-inline')
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$LaunchesListStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements Loading {
+  _$LoadingImpl();
+
   @override
-  $Res call({
-    Object? launchesList = null,
+  String toString() {
+    return 'LaunchesListState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)
+        loaded,
+    required TResult Function() error,
   }) {
-    return _then(_value.copyWith(
-      launchesList: null == launchesList
-          ? _value.launchesList
-          : launchesList // ignore: cast_nullable_to_non_nullable
-              as List<LaunchInfo>,
-    ) as $Val);
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult? Function()? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
   }
 }
 
-/// @nodoc
-abstract class _$$LaunchesListStateImplCopyWith<$Res>
-    implements $LaunchesListStateCopyWith<$Res> {
-  factory _$$LaunchesListStateImplCopyWith(_$LaunchesListStateImpl value,
-          $Res Function(_$LaunchesListStateImpl) then) =
-      __$$LaunchesListStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<LaunchInfo> launchesList});
+abstract class Loading implements LaunchesListState {
+  factory Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-class __$$LaunchesListStateImplCopyWithImpl<$Res>
-    extends _$LaunchesListStateCopyWithImpl<$Res, _$LaunchesListStateImpl>
-    implements _$$LaunchesListStateImplCopyWith<$Res> {
-  __$$LaunchesListStateImplCopyWithImpl(_$LaunchesListStateImpl _value,
-      $Res Function(_$LaunchesListStateImpl) _then)
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<LaunchInfo> launchesList,
+      DateTime startTime,
+      DateTime endTime,
+      int? flightNumber,
+      String? missionName});
+}
+
+/// @nodoc
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$LaunchesListStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? launchesList = null,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? flightNumber = freezed,
+    Object? missionName = freezed,
   }) {
-    return _then(_$LaunchesListStateImpl(
+    return _then(_$LoadedImpl(
       launchesList: null == launchesList
           ? _value._launchesList
           : launchesList // ignore: cast_nullable_to_non_nullable
               as List<LaunchInfo>,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      flightNumber: freezed == flightNumber
+          ? _value.flightNumber
+          : flightNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      missionName: freezed == missionName
+          ? _value.missionName
+          : missionName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$LaunchesListStateImpl implements _LaunchesListState {
-  _$LaunchesListStateImpl({required final List<LaunchInfo> launchesList})
+class _$LoadedImpl implements Loaded {
+  _$LoadedImpl(
+      {required final List<LaunchInfo> launchesList,
+      required this.startTime,
+      required this.endTime,
+      this.flightNumber,
+      this.missionName})
       : _launchesList = launchesList;
 
   final List<LaunchInfo> _launchesList;
@@ -104,39 +276,255 @@ class _$LaunchesListStateImpl implements _LaunchesListState {
   }
 
   @override
+  final DateTime startTime;
+  @override
+  final DateTime endTime;
+  @override
+  final int? flightNumber;
+  @override
+  final String? missionName;
+
+  @override
   String toString() {
-    return 'LaunchesListState(launchesList: $launchesList)';
+    return 'LaunchesListState.loaded(launchesList: $launchesList, startTime: $startTime, endTime: $endTime, flightNumber: $flightNumber, missionName: $missionName)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LaunchesListStateImpl &&
+            other is _$LoadedImpl &&
             const DeepCollectionEquality()
-                .equals(other._launchesList, _launchesList));
+                .equals(other._launchesList, _launchesList) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.flightNumber, flightNumber) ||
+                other.flightNumber == flightNumber) &&
+            (identical(other.missionName, missionName) ||
+                other.missionName == missionName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_launchesList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_launchesList),
+      startTime,
+      endTime,
+      flightNumber,
+      missionName);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LaunchesListStateImplCopyWith<_$LaunchesListStateImpl> get copyWith =>
-      __$$LaunchesListStateImplCopyWithImpl<_$LaunchesListStateImpl>(
-          this, _$identity);
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)
+        loaded,
+    required TResult Function() error,
+  }) {
+    return loaded(launchesList, startTime, endTime, flightNumber, missionName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult? Function()? error,
+  }) {
+    return loaded?.call(
+        launchesList, startTime, endTime, flightNumber, missionName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(
+          launchesList, startTime, endTime, flightNumber, missionName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _LaunchesListState implements LaunchesListState {
-  factory _LaunchesListState({required final List<LaunchInfo> launchesList}) =
-      _$LaunchesListStateImpl;
+abstract class Loaded implements LaunchesListState {
+  factory Loaded(
+      {required final List<LaunchInfo> launchesList,
+      required final DateTime startTime,
+      required final DateTime endTime,
+      final int? flightNumber,
+      final String? missionName}) = _$LoadedImpl;
+
+  List<LaunchInfo> get launchesList;
+  DateTime get startTime;
+  DateTime get endTime;
+  int? get flightNumber;
+  String? get missionName;
+  @JsonKey(ignore: true)
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$LaunchesListStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements Error {
+  _$ErrorImpl();
 
   @override
-  List<LaunchInfo> get launchesList;
+  String toString() {
+    return 'LaunchesListState.error()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$LaunchesListStateImplCopyWith<_$LaunchesListStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ErrorImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)
+        loaded,
+    required TResult Function() error,
+  }) {
+    return error();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult? Function()? error,
+  }) {
+    return error?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<LaunchInfo> launchesList, DateTime startTime,
+            DateTime endTime, int? flightNumber, String? missionName)?
+        loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Error implements LaunchesListState {
+  factory Error() = _$ErrorImpl;
 }
