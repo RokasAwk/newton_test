@@ -46,6 +46,58 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
     fetchData();
   }
 
+  @override
+  void updateFilterData({
+    required DateTimeRange dateTimeRange,
+    int? flightNumber,
+    String? missionName,
+  }) {
+    List<LaunchInfo> sortedList = [];
+
+    // only DateTime changed
+    if (flightNumber == null && (missionName == null || missionName.isEmpty)) {
+      sortedList = checkOnlyDateTimeChanged(dateTimeRange: dateTimeRange);
+    } else {
+      // flightNumber changed
+      // missionName does not changed
+      if (flightNumber != null &&
+          (missionName == null || missionName.isEmpty)) {
+        sortedList = checkFlightNumberChanged(
+          dateTimeRange: dateTimeRange,
+          flightNumber: flightNumber,
+        );
+      }
+
+      // flightNumber does not changed
+      // missionName changed
+      if (flightNumber == null &&
+          missionName != null &&
+          missionName.isNotEmpty) {
+        sortedList = checkMissionNameChanged(
+            dateTimeRange: dateTimeRange, missionName: missionName);
+      }
+
+      // flightNumber and missionName both changed
+      if (flightNumber != null &&
+          missionName != null &&
+          missionName.isNotEmpty) {
+        sortedList = checkFlightNumberAndMissionNameChanged(
+          dateTimeRange: dateTimeRange,
+          flightNumber: flightNumber!,
+          missionName: missionName!,
+        );
+      }
+    }
+
+    state = (state as Loaded).copyWith(
+      launchesList: sortedList,
+      startTime: dateTimeRange.start,
+      endTime: dateTimeRange.end,
+      flightNumber: flightNumber,
+      missionName: missionName,
+    );
+  }
+
   bool checkDateTimeRange(
     int dateTimeUnix,
   ) {
@@ -56,50 +108,73 @@ class LaunchesListNotifierImpl extends LaunchesListNotifier {
             .isBefore((state as Loaded).endTime);
   }
 
-  @override
-  void updateFilterData({
+  List<LaunchInfo> checkOnlyDateTimeChanged({
     required DateTimeRange dateTimeRange,
-    int? flightNumber,
-    String? missionName,
   }) {
     List<LaunchInfo> sortedList = [];
 
-    // only DateTime changed
-    if (flightNumber == null && (missionName == null && missionName!.isEmpty)) {
-      (state as Loaded).launchesList.forEach((element) {
-        if (checkDateTimeRange(element.launchDateUnix)) {
-          sortedList.add(element);
-        }
-      });
-      return;
-    }
+    (state as Loaded).launchesList.forEach((element) {
+      if (checkDateTimeRange(element.launchDateUnix)) {
+        sortedList.add(element);
+      }
+    });
+    return sortedList;
+  }
+
+  List<LaunchInfo> checkFlightNumberChanged({
+    required DateTimeRange dateTimeRange,
+    required int flightNumber,
+  }) {
+    List<LaunchInfo> sortedList = [];
 
     (state as Loaded).launchesList.forEach((element) {
-      // flightNumber changed
-      if (flightNumber != null && element.flightNumber == flightNumber) {
-        if (checkDateTimeRange(element.launchDateUnix)) {
-          sortedList.add(element);
-        }
-      }
-
-      // missionName changed
-      if (missionName != null &&
-          missionName.isNotEmpty &&
-          element.missionName
-              .toLowerCase()
-              .contains(missionName.toLowerCase())) {
+      if (element.flightNumber == flightNumber) {
         if (checkDateTimeRange(element.launchDateUnix)) {
           sortedList.add(element);
         }
       }
     });
 
-    state = (state as Loaded).copyWith(
-      launchesList: sortedList,
-      startTime: dateTimeRange.start,
-      endTime: dateTimeRange.end,
-      flightNumber: flightNumber,
-      missionName: missionName,
-    );
+    return sortedList;
+  }
+
+  List<LaunchInfo> checkMissionNameChanged({
+    required DateTimeRange dateTimeRange,
+    required String missionName,
+  }) {
+    List<LaunchInfo> sortedList = [];
+
+    (state as Loaded).launchesList.forEach((element) {
+      if (element.missionName
+          .toLowerCase()
+          .contains(missionName.toLowerCase())) {
+        if (checkDateTimeRange(element.launchDateUnix)) {
+          sortedList.add(element);
+        }
+      }
+    });
+
+    return sortedList;
+  }
+
+  List<LaunchInfo> checkFlightNumberAndMissionNameChanged({
+    required DateTimeRange dateTimeRange,
+    required int flightNumber,
+    required String missionName,
+  }) {
+    List<LaunchInfo> sortedList = [];
+
+    (state as Loaded).launchesList.forEach((element) {
+      if ((element.flightNumber == flightNumber) &&
+          (element.missionName
+              .toLowerCase()
+              .contains(missionName.toLowerCase()))) {
+        if (checkDateTimeRange(element.launchDateUnix)) {
+          sortedList.add(element);
+        }
+      }
+    });
+
+    return sortedList;
   }
 }
