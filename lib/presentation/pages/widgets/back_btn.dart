@@ -8,7 +8,7 @@ class BackBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: () {
-          appRouter.canPop();
+          appRouter.pop();
         },
         icon: const Icon(Icons.arrow_back));
   }

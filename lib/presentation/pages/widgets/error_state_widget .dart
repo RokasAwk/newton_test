@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
 
-class EmptyListWidget extends StatelessWidget {
-  const EmptyListWidget({super.key});
+class ErrorStateWidget extends StatelessWidget {
+  const ErrorStateWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String emptyMsg = 'No Data';
+    String errorMsg = 'Fetch failed';
 
     return Center(
       child: Column(
@@ -19,7 +19,7 @@ class EmptyListWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            emptyMsg,
+            errorMsg,
             style: const TextStyle(
               fontSize: 20,
               color: AppColors.white,
