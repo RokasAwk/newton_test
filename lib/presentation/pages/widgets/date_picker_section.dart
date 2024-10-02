@@ -13,7 +13,6 @@ class DatePickerSection extends StatelessWidget {
   });
   final BuildContext context;
   final void Function(DateTimeRange) onSelected;
-  final Duration searchDatetimePeriod = const Duration(days: 89);
   final DateTimeRange selectedDateTimeRange;
   final String? title;
 
@@ -27,9 +26,7 @@ class DatePickerSection extends StatelessWidget {
               _calendarButton(
                 text: selectedDateTimeRange.start.onlyDate(),
                 onPressed: () => onShowDatePicker(
-                  minDateTime: selectedDateTimeRange.end
-                      .subtract(searchDatetimePeriod)
-                      .toDateTimeStart(),
+                  minDateTime: DateTime.parse('1970-01-01'),
                   maxDateTime: selectedDateTimeRange.end,
                   initialDate: selectedDateTimeRange.start,
                   onSelected: (value) {
