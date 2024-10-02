@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../presentation/theme/app_colors.dart';
+
 class ToastUtils {
   static final ToastUtils _instance = ToastUtils._internal();
 
@@ -31,7 +33,7 @@ class ToastUtils {
         child: Text(
           msg,
           style: const TextStyle(
-            color: Colors.white,
+            color: AppColors.white,
             fontSize: 14,
           ),
         ),

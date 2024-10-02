@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../di_providers/di_provider.dart';
+import '../../theme/app_colors.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({
@@ -52,8 +53,8 @@ Widget _buildSubPageBtn({
   return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.white,
-        side: const BorderSide(color: Colors.white),
+        foregroundColor: AppColors.white,
+        side: const BorderSide(color: AppColors.white),
       ),
       child: Text(
         page,
