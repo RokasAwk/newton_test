@@ -248,12 +248,15 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
                 DateTimeRange dateTimeRange,
                 int? flightNumber,
                 String? missionName,
-              ) =>
-                  notifier.updateFilterData(
-                    dateTimeRange: dateTimeRange,
-                    flightNumber: flightNumber,
-                    missionName: missionName,
-                  ));
+              ) async {
+                await notifier.fetchData();
+
+                notifier.updateFilterData(
+                  dateTimeRange: dateTimeRange,
+                  flightNumber: flightNumber,
+                  missionName: missionName,
+                );
+              });
         });
   }
 }
