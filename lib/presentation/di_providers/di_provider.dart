@@ -19,7 +19,8 @@ final homeStateNotifierProvider = Provider.autoDispose<HomeNotifier>((ref) {
 });
 
 final launchesListStateNotifierProvider =
-    StateNotifierProvider<LaunchesListNotifier, LaunchesListState>((ref) {
+    StateNotifierProvider.autoDispose<LaunchesListNotifier, LaunchesListState>(
+        (ref) {
   return LaunchesListNotifierImpl(
     getLaunchesUseCase: ref.read(getLaunchesUseCaseProvider),
   );
