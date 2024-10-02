@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_notifier.dart';
 import 'package:newton_tech_app/presentation/pages/launches_list/launches_list_state.dart';
@@ -47,9 +45,6 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
           appBar: AppBar(
             title: _buildAppBarTitle(),
             leading: const BackButton(),
-            actions: [
-              _buildMenuBtn(),
-            ],
           ),
           body: state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
@@ -79,16 +74,6 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
                 );
               },
               error: () => const ErrorStateWidget())),
-    );
-  }
-
-  Widget _buildMenuBtn() {
-    return IconButton(
-      onPressed: () => null,
-      icon: const Icon(
-        Icons.more_vert,
-        color: AppColors.white,
-      ),
     );
   }
 
@@ -195,7 +180,7 @@ class _LaunchListPageState extends ConsumerState<LaunchesListPage> {
             ),
             Image.network(
               item.links.missionPatchSmall,
-              scale: 5,
+              height: 50,
             )
           ],
         ));
