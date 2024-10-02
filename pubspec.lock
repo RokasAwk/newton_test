@@ -217,14 +217,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  fixed:
-    dependency: transitive
-    description:
-      name: fixed
-      sha256: "6aafee68f5f0704a07f148668cdad3be4e756fc05bc46f84e653313e42abb723"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.1"
   fixnum:
     dependency: transitive
     description:
@@ -238,6 +230,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_cupertino_date_picker_fork:
+    dependency: "direct main"
+    description:
+      name: flutter_cupertino_date_picker_fork
+      sha256: edc20d4045a7cb8c75503a73b103ba30d52e1a2c7bc1bff5b4f39dc356b67ee8
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -345,13 +345,13 @@ packages:
     source: hosted
     version: "4.0.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -464,14 +464,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.4"
-  money2:
-    dependency: "direct main"
-    description:
-      name: money2
-      sha256: a13032c13d74d50bf919ec4016282d6e5a39be44936b2dce11b4b4b9abacfe43
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.2.1"
   package_config:
     dependency: transitive
     description:
